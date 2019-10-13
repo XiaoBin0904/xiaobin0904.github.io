@@ -1,0 +1,2004 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="XiaoBin Blog">
+    <meta name="description" content="[TOC]
+GO笔记函数方法unsafe.Sizeof(i)是查看i的大小
+strconv  strconv包实现了基本数据类型和其字符串表示的相互转换
+time time包提供了时间的显示和测量用的函数    
+time.Now 表示当前">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>XiaoBin Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">XiaoBin Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">XiaoBin Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/XiaoBin0904/xiaobin0904.github.io.git" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/XiaoBin0904/xiaobin0904.github.io.git" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-10-13
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>[TOC]</p>
+<h1 id="GO笔记"><a href="#GO笔记" class="headerlink" title="GO笔记"></a>GO笔记</h1><h2 id="函数方法"><a href="#函数方法" class="headerlink" title="函数方法"></a>函数方法</h2><p>unsafe.Sizeof(i)是查看i的大小</p>
+<p>strconv  strconv包实现了基本数据类型和其字符串表示的相互转换</p>
+<p>time time包提供了时间的显示和测量用的函数    </p>
+<p>time.Now 表示当前时间</p>
+<p>格式化日期时间</p>
+<p>方式 1: 就是使用 Printf 或者 SPrintf</p>
+<p>使用 time.Format() 方法完成  time.Format( “2006-01-02 15:04:05”)表示现在时间</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>go中的字符串是不能变的    </p>
+</li>
+<li><p>数据转换只能显性转换</p>
+</li>
+<li><p>i++只能单独使用，并且在变量的后面   不能进行a=i++</p>
+</li>
+<li><p>Go 语言严格区分大小写</p>
+</li>
+<li><p>(1) 先易后难， 即将一个复杂的问题分解成简单的问题。<br>(2) 先死后活</p>
+</li>
+</ol>
+<h2 id="转义符"><a href="#转义符" class="headerlink" title="转义符"></a>转义符</h2><ol>
+<li>\t:    表示一个制表符，实现对齐功能  </li>
+<li>\n:回车     </li>
+<li>\:转移一个\  </li>
+<li>4.\a 响铃  </li>
+<li>5.\b 退格    </li>
+<li>6.\n 换行</li>
+</ol>
+<h2 id="Dos指令"><a href="#Dos指令" class="headerlink" title="Dos指令"></a>Dos指令</h2><pre><code>1. md:新建文件夹 
+2.  dir：查询目录     
+3.  cd:切换盘符   
+4.  rd:删除文件和目录 
+5.  rd: /q/s 文件名   删除文件和目录，带询问  
+6. copy：复制    
+7. cls:清屏   
+8.  exit:退出</code></pre><h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><p>嵌套分支一般控制在三层内</p>
+<pre><code>if{//一层
+    if{//两层
+        if{//三层
+
+        }
+    }
+}</code></pre><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><ul>
+<li><p>匹配项后不需要再加break</p>
+</li>
+<li><p>golang的case后的表达式可以有多个，使用 “,”来间隔</p>
+</li>
+<li><p>switch 穿透-fallthrough ，如果在 case 语句块后增加 fallthrough ,则会继续执行下一个 case，也叫 switch 穿透。</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">switch</span> a<span class="token operator">:=</span><span class="token number">10</span><span class="token punctuation">;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> a<span class="token operator">==</span><span class="token number">10</span><span class="token punctuation">:</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"得分为10"</span><span class="token punctuation">)</span>
+            <span class="token keyword">fallthrough</span><span class="token comment" spellcheck="true">//穿透到下一层输出10和穿透</span>
+        <span class="token keyword">case</span> a<span class="token operator">==</span><span class="token number">20</span><span class="token punctuation">:</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"已经被穿透"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+输出结果为：得分为<span class="token number">10</span>
+已经被穿透</code></pre>
+</li>
+</ul>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><ul>
+<li>go 中的for就是其他语言的while  只是有没有分号问题</li>
+</ul>
+<pre><code>for {
+//循环执行语句
+}</code></pre><p>上面的写法价 等价 for ; ; {} 是一个 无限循环， 通常需要 配合 break  语句使用</p>
+<p>continue 跳出循环</p>
+<ul>
+<li><p>for-range</p>
+<pre class=" language-go"><code class="language-go">  <span class="token keyword">for</span> i<span class="token operator">:=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token function">len</span><span class="token punctuation">(</span>array1<span class="token punctuation">)</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">{</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>array1<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>    <span class="token comment" spellcheck="true">// 循环数组的两个方法</span>
+
+<span class="token keyword">for</span> index<span class="token punctuation">,</span>value<span class="token operator">:=</span><span class="token keyword">range</span> array2<span class="token punctuation">{</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span>value<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token comment" spellcheck="true">// 循环数组的两个方法</span></code></pre>
+</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><pre><code>func 函数名 (形参列表) (返回值列表){
+1.形参列表：表示输入
+2.函数可以有返回值 也可以没有，可以是随意类型
+}</code></pre><p>为了让其它包的文件，可以访问到本包的函数，则该 函数名的首字母需要大写，类似其它语言<br>的 public ,这样才能跨包访问。比如 utils.go 的</p>
+<pre><code>func Cal {
+//次函数可以在其他包内使用  要引入
+}
+</code></pre><ul>
+<li><p>引用时的语法是 ： 包名.函数名</p>
+</li>
+<li><p>如果包名较长，Go 支持给包取别名， 注意细节：取别名后，原来的包名就不能使用了</p>
+<pre><code>import (
+  model  &quot;go_code/anli/customerManage/model&quot;//重命名为model
+  )
+说明: 如果给包取了别名，则需要使用别名来访问该报的函数和变量</code></pre></li>
+</ul>
+<h3 id="函数的递归"><a href="#函数的递归" class="headerlink" title="函数的递归"></a>函数的递归</h3><p>  1) 执行一个函数时，就创建一个新的受保护的独立空间(新函数栈)<br>  2) 函数的局部变量是独立的，不会相互影响<br>  3) 递归必须向退出递归的条件逼近，否则就是无限递归，死龟了:)<br>  4) 当一个函数执行完毕，或者遇到 return，就会返回，遵守谁调用，就将结果返回给谁，同时当函数执行完毕或者返回时，该函数本身也会被系统销毁</p>
+<pre class=" language-go"><code class="language-go">  <span class="token keyword">func</span> <span class="token function">fbn</span><span class="token punctuation">(</span>n <span class="token builtin">int</span> <span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token operator">==</span><span class="token number">1</span><span class="token operator">||</span>n<span class="token operator">==</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token number">1</span>
+      <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token function">fbn</span><span class="token punctuation">(</span>n<span class="token number">-1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">fbn</span><span class="token punctuation">(</span>n<span class="token number">-2</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//递归操作</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span></code></pre>
+<h3 id="函数使用的注意事项和细节"><a href="#函数使用的注意事项和细节" class="headerlink" title="函数使用的注意事项和细节"></a>函数使用的注意事项和细节</h3><p>1) 函数的形参列表可以是多个，返回值列表也可以是多个。<br>2) 形参列表和返回值列表的数据类型可以是值类型和引用类型。<br>3) 函数的命名遵循标识符命名规范，首字母不能是数字，首字母大写该函数可以被本包文件和其它包文件使用，类似 public , 首字母小写，只能被本包文件使用，其它包文件不能使用，类似 privat<br>4) 函数中的变量是局部的，函数外不生效</p>
+<p>5)  基本数据类型和 数组默认都是 值传递的，即进行值拷贝。在函数内修改，不会影响到原来的值。</p>
+<p>6) 如果希望函数内的变量能修改函数外的变量(指的是默认以值传递的方式的数据类型)，可以传入变量的地址&amp;，函数内以指针的方式操作变量。从效果上看类似引用 。</p>
+<p>7) Go 函数不支持函数重载（不能重名）</p>
+<p>8) 在 Go 中， <strong>函数也是一种数据类型</strong>，可以赋值给一个变量，则该变量就是一个函数类型的变量了。通过该<strong>变量可以对函数</strong>调用。</p>
+<p> 9）函数既然是一种数据类型，因此在 Go 中，函数可以作为形参，并且调用</p>
+<pre><code>func myFun(funvar func(int,int)int ,num1 int) int {
+return funvar(num1,num2)//形参
+}</code></pre><p>10) Go 支持可变参数</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">sum</span> <span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token builtin">int</span> <span class="token punctuation">)</span>sum <span class="token builtin">int</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token comment" spellcheck="true">//支持0到多个参数</span>
+<span class="token keyword">func</span> <span class="token function">sum</span> <span class="token punctuation">(</span>n1 <span class="token builtin">int</span> <span class="token punctuation">,</span>args<span class="token operator">...</span><span class="token builtin">int</span><span class="token punctuation">)</span> sum <span class="token builtin">int</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token comment" spellcheck="true">//支持一到多个参数</span></code></pre>
+<h3 id="init函数"><a href="#init函数" class="headerlink" title="init函数"></a>init函数</h3><p>每一个源文件都可以包含一个 init  函数，该函数会在 main 函数执行前，被 Go 运行框架调用，也就是说 init 会在 main 函数前被调用。</p>
+<ul>
+<li>1) 如果一个文件同时包含 全局变量定义，init  函数和 main  函数，则执行的流程 全局变量定义-&gt;init函数-&gt;main (init函数会先被调用)</li>
+<li></li>
+</ul>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">fbn</span><span class="token punctuation">(</span>n <span class="token builtin">int</span> <span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token operator">==</span><span class="token number">1</span><span class="token operator">||</span>n<span class="token operator">==</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">fbn</span><span class="token punctuation">(</span>n<span class="token number">-1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">fbn</span><span class="token punctuation">(</span>n<span class="token number">-2</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//递归操作</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Go 支持匿名函数，匿名函数就是没有名字的函数，如果我们某个函数只是希望使用一次，可以考虑使用匿名函数，匿名函数也可以实现多次调用。</p>
+<h3 id="匿名函数使用方式"><a href="#匿名函数使用方式" class="headerlink" title="匿名函数使用方式"></a>匿名函数使用方式</h3><p>(1)在定义匿名函数时就直接调用，这种方式匿名函数只能调用一次。</p>
+<pre><code>res1:= func (n1 int,n2 int )int {
+return n1+n2
+}(10,20)
+fmt.Println(&quot;res1=&quot;,res1)</code></pre><p>(2)将 匿名函数赋给一个变量(函数变量)，再通过该数 变量来调用匿名函数</p>
+<pre><code>res1:= func (n1 int,n2 int )int {
+return n1-n2
+}
+res2:=res1(10,2)
+fmt.Println(&quot;res2=&quot;,res2)</code></pre><h3 id="全局匿名函数"><a href="#全局匿名函数" class="headerlink" title="全局匿名函数"></a>全局匿名函数</h3><p>如果将匿名函数赋给一个全局变量，那么这个匿名函数，就成为一个全局匿名函数，可以在程序有效。</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span><span class="token punctuation">(</span>
+<span class="token comment" spellcheck="true">//fun1是一个全局匿名函数</span>
+Fun1 <span class="token operator">=</span> <span class="token keyword">func</span><span class="token punctuation">(</span>n1 <span class="token builtin">int</span><span class="token punctuation">,</span>n2 <span class="token builtin">int</span> <span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+<span class="token keyword">return</span> n1<span class="token operator">*</span>n2
+<span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//全局匿名函数的使用</span>
+res4<span class="token operator">:=</span><span class="token function">Fun1</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"res4="</span><span class="token punctuation">,</span>res4<span class="token punctuation">)</span></code></pre>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>基本介绍：闭包就是 <strong>一个函数</strong>和与 <strong>其相关的引用环境</strong>组合的 一个整体(实体)</p>
+<pre class=" language-go"><code class="language-go">累加器
+<span class="token keyword">func</span> <span class="token function">Addupper</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> n <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">10</span>
+    <span class="token keyword">return</span> <span class="token keyword">func</span> <span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    n<span class="token operator">=</span>n<span class="token operator">+</span>x
+    <span class="token keyword">return</span> n
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+f<span class="token operator">:=</span><span class="token function">Addupper</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//11</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//13</span>
+
+<span class="token punctuation">}</span></code></pre>
+<h3 id="说明与总结"><a href="#说明与总结" class="headerlink" title="说明与总结"></a>说明与总结</h3><p>1) AddUpper 是一个函数，返回的数据类型是 fun (int) int</p>
+<p>2）说明闭包</p>
+<pre><code>var n int = 10
+    return func (x int) int {
+    n=n+x
+    return n
+    }</code></pre><p>返回的是一个匿名函数, 但是这个匿名函数引用到函数外的 n ,因此这个匿名函数就和 n 形成一个整体，构成闭包。</p>
+<p>3) 大家可以这样理解: 闭包是类, 函数是操作，n 是字段。函数和它使用到 n 构成闭包。<br>4) 当我们反复的调用 f 函数时，因为 n 是初始化一次，因此每调用一次就进行累计。<br>5) 我们要搞清楚闭包的关键，就是要分析出返回的函数它使用(引用)到哪些变量，因为函数和它引<br>用到的变量共同构成闭包。<br>6) 对上面代码的一个修改，加深对闭包的理解</p>
+<pre><code>累加器
+func Addupper() func (int) int {
+    var n int = 10
+    var str =&quot;hello&quot;
+    return func (x int) int {
+    n=n+x
+    str += string(36)//=&gt;36=&#39;$&#39;
+    fmt.Println(&quot;str&quot;,str)
+    return n
+    }
+}
+func main(){
+f:=Addupper()
+fmt.Println(f(1))//11
+fmt.Println(f(2))//13
+
+}</code></pre><h2 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h2><h3 id="注意事项和细节"><a href="#注意事项和细节" class="headerlink" title="注意事项和细节"></a>注意事项和细节</h3><p>1) 当 go 执行到一个 defer 时，不会立即执行 defer 后的语句，而是将 defer 后的语句压入到一个栈中[我为了讲课方便，暂时称该栈为 defer 栈], 然后继续执行函数下一个语句。<br>2) 当函数执行完毕后，在从 defer 栈中，依次从栈顶取出语句执行(注：遵守栈 先入后出的机制)，所以同学们看到前面案例输出的顺序。</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/defer.png" alt="1567749419812"></p>
+<p>1) 在 golang 编程中的通常做法是，创建资源后，比如(打开了文件，获取了数据库的链接，或者是<br>锁资源)， 可以执行 defer file.Close() defer connect.Close()<br>2) 在 defer 后，可以继续使用创建资源.<br>3) 当函数完毕后，系统会依次从 defer 栈中，取出语句，关闭资源.<br>4) 这种机制，非常简洁，程序员不用再为在什么时机关闭资源而烦心</p>
+<h2 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h2><p>1.时间的常量<br>const (<br>Nanosecond Duration = 1 //纳秒<br>Microsecond = 1000 * Nanosecond //微秒<br>Millisecond = 1000 * Microsecond //毫秒<br>Second = 1000 * Millisecond //秒<br>Minute = 60 * Second //分钟<br>Hour = 60 * Minute //小时<br>)</p>
+<p>2.: 在程序中可用于获取指定时间单位的时间，比如想得到 100  毫秒<br>100 * time. Millisecond</p>
+<p>3.now.NuixNano()获取时间戳</p>
+<p>4.time.Sleep()休眠</p>
+<h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><p>Golang 设计者为了编程方便，提供了一些函数，这些函数可以直接使用，我们称为 Go 的内置函<br>数。文档：<a href="https://studygolang.com/pkgdoc" target="_blank" rel="noopener">https://studygolang.com/pkgdoc</a> -&gt; builtin</p>
+<p>1) len：用来求长度，比如 string、array、slice、map、channel<br>2) new：用来分配内存，主要用来分配值类型，比如 int、float32,struct…返回的是指针<br>3) make：用来 分配内存，主要用来 分配引用类型，比如 channel、map、slice。</p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>1) Go 语言追求简洁优雅，所以，Go 语言不支持传统的 try…catch…finally 这种处理。<br>2) Go 中引入的处理方式为：defer, panic, recover<br>3) 这几个异常的使用场景可以这么简单描述：Go 中可以抛出一个 panic 的异常，然后在 defer 中<br>通过 recover 捕获这个异常，然后正常处理</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86.png" alt="1567749868915"></p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%862.png" alt="1567749884987"></p>
+<p>Go 程序中，也支持自定义错误， 使用 errors.New 和 panic 内置函数。</p>
+<p>1) errors.New(“错误说明”) , 会返回一个 error 类型的值，表示一个错误<br>2) panic 内置函数 ,接收一个 interface{}类型的值（也就是任何值了）作为参数。可以接收 error 类</p>
+<h2 id="数组与切片"><a href="#数组与切片" class="headerlink" title="数组与切片"></a>数组与切片</h2><h3 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h3><p>数组的定义<br>var 数组名 [数组大小]数据类型<br>var a [5]int<br>赋初值 a[0] = 1 a[1] = 30 ….</p>
+<p>1) 数组的地址可以通过数组名来获取 &amp;intArr<br>2) 数组的第一个元素的地址，就是数组的首地址<br>3) 数组的各个元素的地址间隔是依据数组的类型决定，比如 int64 -&gt; 8 int32-&gt;4…</p>
+<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><pre><code>    var array1=[...]string{&quot;刘&quot;,&quot;效&quot;,&quot;斌&quot;}
+     var array2=[3]string{&quot;l&quot;,&quot;x&quot;,&quot;b&quot;}
+     array3:=[...]string{&quot;liu&quot;}
+
+     for i:=0;i&lt;len(array1);i++{
+          fmt.Println(array1[i])
+     }    // 循环数组的两个方法
+
+     for index,value:=range array2{
+         fmt.Println(index,value)
+     }
+
+    for index,value:=range array3     {
+         fmt.Println(index,value)
+    }  // 循环数组的两个方法</code></pre><h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p>1) 切片的英文是 slice<br>2) 切片是数组的一个引用，因此 切片是引用类型，在进行传递时，遵守引用传递的机制。<br>3) 切片的 使用和数组类似，遍历切片、访问切片的元素和求切片长度 len(slice)都一样。<br>4) 切片的长度是可以变化的，因此切片是一个 可以动态变化数组。<br>5) 切片定义的基本语法:<br>var 切片名 []类型<br>比如：var a [] int</p>
+<p>通过 make 来创建切片.<br>基本语法：var 名 切片名 []type = make([]type, len, [cap])</p>
+<pre><code>var slice= array1[0:3]
+    // fmt.Println(slice)//print slice
+    // fmt.Println(len(slice)) //lenght slice 
+    // fmt.Println(cap(slice))//capacity slice
+  //查看数组长度与容量
+
+  /  var slice1 []int =make([]int,3,3)
+    //  slice1[1]=2
+    //  fmt.Println(slice1)//[0 2 0]
+</code></pre><p>1) 通过 make 方式创建切片可以指定切片的大小和容量<br>2) 如果没有给切片的各个元素赋值，那么就会使用默认值[int , float=&gt; 0 string =&gt;”” bool =&gt;false]<br>3) 通过 make 方式创建的切片对应的数组是由 make 底层维护，对外不可见，即只能通过 slice 去访问各个元素</p>
+<ol>
+<li><p>slice 的确是一个引用类型</p>
+</li>
+<li><p>slice 从底层来说，其实就是一个数据结构(struct 结构体)<br> type slice struct {<br> ptr *[2]int<br> len int<br> cap int<br> }</p>
+</li>
+</ol>
+<h3 id="切片的遍历"><a href="#切片的遍历" class="headerlink" title="切片的遍历"></a>切片的遍历</h3><pre><code>for index,value:=range slice{
+        fmt.Println(index,value)
+    }  </code></pre><h3 id="切片的注意事项与细节"><a href="#切片的注意事项与细节" class="headerlink" title="切片的注意事项与细节"></a>切片的注意事项与细节</h3><p>1) 切片初始化时 var slice = arr[startIndex:endIndex]<br>说明：从 arr 数组下标为 startIndex，取到 下标为 endIndex 的元素(不含 arr[endIndex])。<br>2) 切片初始化时，仍然不能越界。范围在 [0-len(arr)] 之间，但是可以动态增长.</p>
+<p>var slice = arr[0:end] 可以简写 var slice = arr[:end]<br>var slice = arr[start:len(arr)] 可以简写： var slice = arr[start:]<br>var slice = arr[0:len(arr)] 可以简写: var slice = arr[:]<br>3) cap 是一个内置函数，用于统计切片的容量，即最大可以存放多少个元素。<br>4) 切片定义完后，还不能使用，因为本身是一个空的，需要让其引用到一个数组，或者 make 一个空间供切片来使用</p>
+<p>5) 切片可以继续切片</p>
+<p>​    <img src="go%E7%AC%94%E8%AE%B0/%E5%88%87%E7%89%87%E7%BB%A7%E7%BB%AD%E5%88%87%E7%89%87.png" alt="1567750831362"></p>
+<p>6) 用 append 内置函数，可以对切片进行动态追加</p>
+<pre><code>var slice3 []int = []int{1,2,3}
+slice3 = append(slice3,1,2)
+ fmt.Println(slice3)
+</code></pre><p>切片 append 操作的本质就是对数组扩容<br>go 底层会创建一下新的数组 newArr(安装扩容后大小)<br>将 slice 原来包含的元素拷贝到新的数组 newArr<br>slice 重新引用到 newArr<br>注意 newArr 是在底层来维护的，程序员不可见.</p>
+<p>7) 切片的拷贝操作</p>
+<pre><code>copy
+ var slice4 []int = []int{1,2,3}
+ var slice5 = make([]int,10)
+  copy(slice5,slice4)
+ fmt.Println(slice5)</code></pre><p>1) copy(para1, para2) 参数的数据类型是切片<br>(2) 按照上面的代码来看, slice4 和 slice5 的数据空间是独立，相互不影响，也就是说 slice4[0]= 999,<br>slice5[0] 仍然是 1</p>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h3 id="基本语法-1"><a href="#基本语法-1" class="headerlink" title="基本语法"></a>基本语法</h3><p>var map 变量名 map[keytype]valuetype</p>
+<h3 id="map-声明的举例"><a href="#map-声明的举例" class="headerlink" title="map 声明的举例"></a>map 声明的举例</h3><p>var a map[string]string<br>var a map[string]int<br>var a map[int]string<br>var a map[string]map[string]string<br>注意：声明是不会分配内存的，初始化需要 make ，分配内存后才能赋值和使用。</p>
+<h3 id="声明的三种方法"><a href="#声明的三种方法" class="headerlink" title="声明的三种方法"></a>声明的三种方法</h3><pre><code>// 声明三种方法
+    // 第一种
+    var a map[string]string
+    a = make(map[string]string,10)
+    a[&quot;姓名&quot;]=&quot;刘效斌&quot;
+    a[&quot;年龄&quot;]=&quot;19&quot;
+    fmt.Println(a)//map[姓名:刘效斌 年龄:19]
+
+    // 第二种
+    a := make(map[string]string,10)
+    a[&quot;姓名&quot;]=&quot;刘效斌&quot;
+    a[&quot;年龄&quot;]=&quot;19&quot;
+    fmt.Println(a)
+
+    // 第三种
+        heroes :=map[string]string{
+        &quot;姓名&quot;:&quot;刘效斌&quot;,
+        &quot;年龄&quot;:&quot;19&quot;,
+    }
+    fmt.Println(heroes)//这种通常用的多！</code></pre><h3 id="map的增删改查"><a href="#map的增删改查" class="headerlink" title="map的增删改查"></a>map的增删改查</h3><p>map 增加和更新：<br>map[“key”] = value // 如果 key  还没有，就是增加，如果 key  存在就是修改</p>
+<p>map 删除：<br>说明：<br>delete(map，”key”) ，delete 是一个内置函数，如果 key 存在，就删除该 key-value,如果 key 不存在，不操作，但是也不会报错</p>
+<p>遍历</p>
+<pre><code>//声明Map
+    studentMap:=make(map[string]map[string]string,10)
+    studentMap[&quot;stu1&quot;]=  make(map[string]string)
+    studentMap[&quot;stu1&quot;][&quot;姓名&quot;]=&quot;tom&quot;
+    studentMap[&quot;stu1&quot;][&quot;年龄&quot;]=&quot;18&quot;
+    studentMap[&quot;stu1&quot;][&quot;地址&quot;]=&quot;山东&quot;
+    fmt.Println(studentMap[&quot;stu1&quot;])   //map[地址:山东 姓名:tom 年龄:18]
+
+     delete(studentMap,&quot;stu1&quot;)
+     fmt.Println(studentMap)  //删除//map[]
+
+     val,ok := studentMap[&quot;stu1&quot;]
+      if ok{
+        fmt.Printf(&quot;值为%v&quot;,val)
+    }else{
+         fmt.Printf(&quot;找不到&quot;)
+     }  //查  值为map[地址:山东 姓名:tom 年龄:18]
+
+for key,val := range studentMap{
+     fmt.Println(key,val)
+}       //遍历  stu1 map[地址:山东 姓名:tom 年龄:18]
+</code></pre><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><h4 id="基本语法-2"><a href="#基本语法-2" class="headerlink" title="基本语法"></a>基本语法</h4><p>type 结构体名称 struct {<br>field1 type<br>field2 type<br>}</p>
+<h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><p>type Student struct {<br>Name string //字段<br>Age int //字段<br>Score float32<br>}</p>
+<h4 id="注意事项和细节说明"><a href="#注意事项和细节说明" class="headerlink" title="注意事项和细节说明"></a>注意事项和细节说明</h4><p>1) 字段声明语法同变量，示例：字段名 字段类型<br>2) 字段的类型可以为：基本类型、数组或引用类型<br>3) 在创建一个结构体变量后，如果没有给字段赋值，都对应一个零值(默认值)，规则同前面讲的一样:<br>布尔类型是 false ，数值是 0 ，字符串是 “”。<br>数组类型的默认值和它的元素类型相关，比如 score [3]int 则为[0, 0, 0]</p>
+<p>4) 不同结构体变量的字段是独立，互不影响，一个结构体变量字段的更改，不影响另外一个,  结构体<br>是值类型</p>
+<h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><p>一个结构体的声明是这样的:</p>
+<pre><code>package model
+type Student struct {
+Name string...
+}</code></pre><p>因为这里的 Student 的首字母 S 是大写的，如果我们想在其它包创建 Student 的实例(比如 main 包)，<br>引入 model 包后，就可以直接创建 Student 结构体的变量(实例)。 但是问题来了 ， 如果首字母是小写的 ，<br>如 比如 是 是 type student struct {….}  就不不行了，怎么办—&gt;  工厂模式来解决</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png" alt></p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F2.png" alt="工厂模式2"></p>
+<h3 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h3><h4 id="抽象的介绍"><a href="#抽象的介绍" class="headerlink" title="抽象的介绍"></a>抽象的介绍</h4><p>我们在前面去定义一个结构体时候，实际上就是把一类事物的<strong>共有的 属性( 字段)和 行为( 方法)提取</strong>出来，形成一个 物理模型(结构体)**。这种研究问题的方法称为抽象。</p>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><p>Golang 仍然有面向对象编程的继承，封装和多态的特性，只是实现的方式和其它 OOP 语言不一样，下面我们一一为同学们进行详细的讲解 Golang 的三大特性是如何实现的。</p>
+<h4 id="封装的理解和好处"><a href="#封装的理解和好处" class="headerlink" title="封装的理解和好处"></a>封装的理解和好处</h4><p>1) 隐藏实现细节<br>2) 提可以对 数据进行验证，保证安全合理(Age)</p>
+<h4 id="封装的实现步骤"><a href="#封装的实现步骤" class="headerlink" title="封装的实现步骤"></a>封装的实现步骤</h4><p>1) 将结构体、字段(属性)的首字母小写(不能导出了，其它包不能使用，类似 private)<br>2) 给结构体所在包提供一个工厂模式的函数，首字母大写。类似一个构造函数<br>3) 提供一个首字母大写的 Set 方法(类似其它语言的 public)，用于对属性判断并赋值</p>
+<pre><code>func (var 结构体类型名) SetXxx(参数列表) (返回值列表) {
+//加入数据验证的业务逻辑
+var.字段 = 参数
+}</code></pre><p>4) 提供一个首字母大写的 Get 方法(类似其它语言的 public)，用于获取属性的值</p>
+<pre><code>func (var 结构体类型名) GetXxx() {
+return var.age;
+}</code></pre><p>特别说明：在 Golang 开发中并没有特别强调封装，这点并不像 Java. 所以提醒学过 java 的朋友，不用总是用 java 的语法特性来看待 Golang, Golang 本身对面向对象的特性做了简化的.</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h4 id="嵌套匿名结构体的基本语法"><a href="#嵌套匿名结构体的基本语法" class="headerlink" title="嵌套匿名结构体的基本语法"></a>嵌套匿名结构体的基本语法</h4><p>type Goods struct {<br>Name string<br>Price int<br>}<br>type Book struct {<br>Goods //这里就是嵌套匿名结构体 Goods<br>Writer string<br>}</p>
+<h4 id="继承的深入讨论"><a href="#继承的深入讨论" class="headerlink" title="继承的深入讨论"></a>继承的深入讨论</h4><p>结构体可以 使用嵌套匿名结构体所有的字段和方法，即：首字母大写或者小写的字段、方法，都可以使用。</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E7%BB%A7%E6%89%BF.png" alt="1568252385854"></p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E7%BB%A7%E6%89%BF2.png" alt="1568252391830"></p>
+<p>2) 匿名结构体字段访问可以简化</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E7%AE%80%E5%8C%96%E7%BB%A7%E6%89%BF.png" alt="1568252455625"></p>
+<p>​    （1)  当我们直接通过 b  访问字段或方法时，其执行流程如下比如 b.Name<br>​        (2) 编译器会先看 b 对应的类型有没有 Name, 如果有，则直接调用 B 类型        的 Name 字段<br>​        (3) 如果没有就去看 B 中嵌入的匿名结构体 A 有没有声明 Name 字段，如果有就调用,如果没有继续查找..如果都找不到就报错.</p>
+<p>3) 当 结构体和 匿名结构体有相同的字段或者方法时， 编译器采用就近访问原则访问，如希望访问匿名结构体的字段和方法，可以通过匿名结构体名来区分</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E5%8C%BF%E5%90%8D%E8%BF%91%E8%AE%BF%E9%97%AE%E5%8E%9F%E5%88%99.png" alt="1568252797596"></p>
+<p>5) 如果一个 struct 嵌套了一个有名结构体，这种模式就是 组合，如果是组合关系，那么在访问组合的结构体的字段或方法时，必须带上结构体的名字</p>
+<h4 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h4><p>如 一个 struct  嵌套了多个匿名结构体，那么该结构体可以直接访问嵌套的匿名结构体的字段和方法， 从而实现了多重继承。</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF.png" alt></p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><h4 id="基本语法-3"><a href="#基本语法-3" class="headerlink" title="基本语法"></a>基本语法</h4><pre><code>type 接口名 interface {
+methode1(参数列表)返回值列表
+methode2(参数列表)返回值列表
+}
+func (t 自定义类型)methode1（参数列表）返回值列表{
+方法实现
+}
+func (t 自定义类型)methode2（参数列表）返回值列表{
+方法实现
+}</code></pre><p>1) 接口里的 所有方法都没有方法体，即接口的方法都是没有实现的方法。接口体现了程序设计的<br>多态和 高内聚低偶合的思想。<br>2) Golang 中的接口， 不需要 显式的实现。只要一个变量，含有接口类型中的所有方法，那么这个<br>变量就实现这个接口。因此，Golang 中 没有 implement 这样的关键字</p>
+<h4 id="注意事项和细节-1"><a href="#注意事项和细节-1" class="headerlink" title="注意事项和细节"></a>注意事项和细节</h4><p>1) 接口本身 不能创建实例,但是 可以指向一个实现了该接口的自定义类型的变量</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E6%8E%A5%E5%8F%A3.png" alt="1568260029521"></p>
+<p>2) 接口中所有的方法都没有方法体,即都是没有实现的方法。<br>3) 在 Golang 中，一个自定义类型需要将某个接口的所有方法都实现，我们说这个自定义类型实现了该接口。<br>4) 一个自定义类型只有实现了某个接口，才能将该自定义类型的实例(变量)赋给接口类型<br>5) 只要是自定义数据类型，就可以实现接口，不仅仅是结构体类型。</p>
+<p>6) 一个自定义类型可以实现多个接口</p>
+<p>7) Golang 接口中不能有任何变量</p>
+<p>8) 一个接口(比如 A 接口)可以继承多个别的接口(比如 B,C 接口)，这时如果要实现 A 接口，也必须将 B,C 接口的方法也全部实现。</p>
+<p>9) interface 类型默认是一个指针(引用类型)，如果没有对 interface 初始化就使用，那么会输出 nil<br>10) 空接口 interface{} 没有任何方法， 所以<strong>所有类型都实现了空接 口</strong>, 即我们可以 把任何一个变量<br>赋给空接口。</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<span class="token comment" spellcheck="true">//实现Hero结构体切片的排序 </span>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">"fmt"</span>
+    <span class="token string">"sort"</span>
+    <span class="token string">"math/rand"</span>
+<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//1.声明Hero结构体</span>
+<span class="token keyword">type</span> Hero <span class="token keyword">struct</span><span class="token punctuation">{</span>
+    Name <span class="token builtin">string</span>
+    Age <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//2.声明一个Hero结构体切片类型</span>
+<span class="token keyword">type</span> HeroSlice <span class="token punctuation">[</span><span class="token punctuation">]</span>Hero
+<span class="token comment" spellcheck="true">//3.实现interface 接口 </span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>hs HeroSlice<span class="token punctuation">)</span> <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>hs<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//less方法就是决定你使用声明标准进行排序</span>
+<span class="token comment" spellcheck="true">//1.按Hero的年龄从小到大进行排序</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>hs HeroSlice<span class="token punctuation">)</span> <span class="token function">Less</span><span class="token punctuation">(</span>i <span class="token punctuation">,</span>j <span class="token builtin">int</span> <span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> hs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>Age <span class="token operator">&lt;</span> hs<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Age <span class="token comment" spellcheck="true">// 按照升序排序</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>hs HeroSlice<span class="token punctuation">)</span> <span class="token function">Swap</span><span class="token punctuation">(</span>i <span class="token punctuation">,</span>j <span class="token builtin">int</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    temp <span class="token operator">:=</span> hs<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    hs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span> hs<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+    hs<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span> temp<span class="token comment" spellcheck="true">//进行交换</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment" spellcheck="true">//冒泡排序</span>
+
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 先定义一个切片 </span>
+    <span class="token keyword">var</span>  intSlice <span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//使用sort.Int()方法进行升序排序</span>
+    sort<span class="token punctuation">.</span><span class="token function">Ints</span><span class="token punctuation">(</span>intSlice<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>intSlice<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">//定义10个人员 随机 </span>
+    <span class="token keyword">var</span> heroes HeroSlice
+    <span class="token keyword">for</span> i<span class="token operator">:=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">{</span>
+        hero <span class="token operator">:=</span> Hero<span class="token punctuation">{</span>
+            Name<span class="token punctuation">:</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"英雄%d"</span><span class="token punctuation">,</span>rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Age <span class="token punctuation">:</span>rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+        heroes <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>heroes<span class="token punctuation">,</span>hero<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//遍历输出 heroes</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span>v<span class="token operator">:=</span><span class="token keyword">range</span> heroes<span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//使用sort.Sort()方法排序</span>
+    sort<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span>heroes<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"排序后........."</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span>v<span class="token operator">:=</span><span class="token keyword">range</span> heroes<span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre>
+<h4 id="实现接口-vs-继承"><a href="#实现接口-vs-继承" class="headerlink" title="实现接口 vs 继承"></a>实现接口 vs 继承</h4><pre><code>package main
+import (
+    &quot;fmt&quot;
+)
+//继承+接口
+type Monkey struct{
+    Name string 
+}
+//声明BirdAble接口
+type BirdAble interface{
+    Flying()
+}
+func (this *LittleMonkey ) Flying(){
+    fmt.Println(this.Name,&quot;通过学习会飞翔...&quot;)
+}
+
+func (this *Monkey) pashu(){
+    fmt.Println(&quot;这个猴子会爬树&quot;)
+}
+type LittleMonkey struct{
+    Monkey
+}
+func main(){
+    monkey := LittleMonkey{
+        Monkey{
+            Name:&quot;悟空&quot;,
+        },
+    }
+    monkey.pashu()
+    monkey.Flying()
+}</code></pre><p>1) 当 A 结构体继承了 B 结构体，那么 A 结构就自动的继承了 B 结构体的字段和方法，并且可以直<br>接使用<br>2) 当 A 结构体需要扩展功能，同时不希望去破坏继承关系，则可以去实现某个接口即可，因此我<br>们可以认为：实现接口是对继承机制的补充.</p>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>多态参数<br>在前面的 Usb 接口案例，Usb usb ，即可以接收手机变量，又可以接收相机变量，就体现了 Usb 接口多态。<br>多态数组<br>演示一个案例：给 Usb 数组中，存放 Phone 结构体 和 Camera 结构体变量</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+<span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">//声明/定义一个接口</span>
+<span class="token keyword">type</span> Usb <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">//声明了两个没有实现的方法</span>
+<span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Phone <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+name <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//让 Phone 实现 Usb 接口的方法</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p Phone<span class="token punctuation">)</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"手机开始工作。。。"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p Phone<span class="token punctuation">)</span> <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"手机停止工作。。。"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Camera <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+name <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//让 Camera 实现 Usb 接口的方法</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c Camera<span class="token punctuation">)</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"相机开始工作。。。"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c Camera<span class="token punctuation">)</span> <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"相机停止工作。。。"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">//定义一个 Usb 接口数组，可以存放 Phone 和 Camera 的结构体变量</span>
+<span class="token comment" spellcheck="true">//这里就体现出多态数组</span>
+<span class="token keyword">var</span> usbArr <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>Usb
+usbArr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> Phone<span class="token punctuation">{</span><span class="token string">"vivo"</span><span class="token punctuation">}</span>
+usbArr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> Phone<span class="token punctuation">{</span><span class="token string">"小米"</span><span class="token punctuation">}</span>
+usbArr<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> Camera<span class="token punctuation">{</span><span class="token string">"尼康"</span><span class="token punctuation">}</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>usbArr<span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<span class="token comment" spellcheck="true">//类型断言</span>
+<span class="token comment" spellcheck="true">//给 Phone 结构体增加一个特有的方法 call(), 当 Usb 接口接收的是 Phone 变量时，</span>
+<span class="token comment" spellcheck="true">//还需要调用 call方法</span>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//声明/定义一个接口</span>
+<span class="token keyword">type</span> Usb <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//声明了两个没有实现的方法</span>
+    <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">type</span> Phone <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//让 Phone 实现 Usb 接口的方法</span>
+
+    <span class="token keyword">func</span> <span class="token punctuation">(</span>p Phone<span class="token punctuation">)</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"手机开始工作。。。"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">func</span> <span class="token punctuation">(</span>p Phone<span class="token punctuation">)</span> <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"手机停止工作。。。"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">func</span> <span class="token punctuation">(</span>p Phone<span class="token punctuation">)</span> <span class="token function">Call</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"手机 在打电话.."</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">type</span> Camera <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//让 Camera 实现 Usb 接口的方法</span>
+    <span class="token keyword">func</span> <span class="token punctuation">(</span>c Camera<span class="token punctuation">)</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"相机开始工作。。。"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">func</span> <span class="token punctuation">(</span>c Camera<span class="token punctuation">)</span> <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"相机停止工作。。。"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">type</span> Computer <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//使用接口usb</span>
+    <span class="token keyword">func</span> <span class="token punctuation">(</span>computer Computer<span class="token punctuation">)</span> <span class="token function">Working</span><span class="token punctuation">(</span>usb Usb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    usb<span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">//如果 usb 是指向 Phone 结构体变量，则还需要调用 Call 方法</span>
+    <span class="token comment" spellcheck="true">// 类型断言..[ 注意体会!!!]</span>
+    <span class="token comment" spellcheck="true">//如果是phone 的话就执行 Call()函数</span>
+    <span class="token keyword">if</span> phone<span class="token punctuation">,</span> ok <span class="token operator">:=</span> usb<span class="token punctuation">.</span><span class="token punctuation">(</span>Phone<span class="token punctuation">)</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//phone 可以随便写 后面也要改 a,ok  a.Call()</span>
+    phone<span class="token punctuation">.</span><span class="token function">Call</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    usb<span class="token punctuation">.</span><span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//定义一个 Usb 接口数组，可以存放 Phone 和 Camera 的结构体变量</span>
+    <span class="token comment" spellcheck="true">//这里就体现出多态数组</span>
+    <span class="token keyword">var</span> usbArr <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>Usb
+    usbArr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> Phone<span class="token punctuation">{</span><span class="token string">"vivo"</span><span class="token punctuation">}</span>
+    usbArr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> Phone<span class="token punctuation">{</span><span class="token string">"小米"</span><span class="token punctuation">}</span>
+    usbArr<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> Camera<span class="token punctuation">{</span><span class="token string">"尼康"</span><span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//遍历 usbArr</span>
+
+    <span class="token comment" spellcheck="true">//Phone 还有一个特有的方法 call()，请遍历 Usb 数组，如果是 Phone 变量，</span>
+    <span class="token comment" spellcheck="true">//除了调用 Usb 接口声明的方法外，还需要调用 Phone 特有方法 call. =》类型断言</span>
+    <span class="token keyword">var</span> computer Computer
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> usbArr<span class="token punctuation">{</span>
+    computer<span class="token punctuation">.</span><span class="token function">Working</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//fmt.Println(usbArr)</span>
+    <span class="token punctuation">}</span></code></pre>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h4 id="创建与写入"><a href="#创建与写入" class="headerlink" title="创建与写入"></a>创建与写入</h4><pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<span class="token comment" spellcheck="true">//文件的创建与写入</span>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">"fmt"</span>
+    <span class="token string">"bufio"</span>
+    <span class="token string">"os"</span>
+
+<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//编写一个判断文件是否存在的函数</span>
+<span class="token keyword">func</span> <span class="token function">PathExists</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token builtin">bool</span><span class="token punctuation">,</span><span class="token builtin">error</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment" spellcheck="true">//如果bool为真证明存在 如果为假证明不存在，如果为假且还有err证明有其他错误</span>
+    <span class="token boolean">_</span><span class="token punctuation">,</span>err <span class="token operator">:=</span>os<span class="token punctuation">.</span><span class="token function">Stat</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err<span class="token operator">==</span><span class="token boolean">nil</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//文件存在</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">,</span><span class="token boolean">nil</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> os<span class="token punctuation">.</span><span class="token function">IsNotExist</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment" spellcheck="true">//返回一个布尔值说明该错误是否表示一个文件或目录不存在。ErrNotExist和一些系统调用错误会使它返回真。</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">,</span><span class="token boolean">nil</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">,</span>err
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//创建一个新文件 写入内容</span>
+    <span class="token comment" spellcheck="true">//打开文件123.text</span>
+    filepath<span class="token operator">:=</span> <span class="token string">"C:/Users/ASUS/Desktop/123.txt"</span>
+    <span class="token comment" spellcheck="true">//OpenFile是一个更一般性的文件打开函数，大多数调用者都应用Open或Create代替本函数。</span>
+    <span class="token comment" spellcheck="true">//它会使用指定的选项（如O_RDONLY等）、指定的模式（如0666等）打开指定名称的文件。</span>
+    <span class="token comment" spellcheck="true">//如果操作成功，返回的文件对象可用于I/O。如果出错，错误底层类型是*PathError。</span>
+        <span class="token comment" spellcheck="true">//func OpenFile(name string, flag int, perm FileMode) (file *File, err error)</span>
+
+    <span class="token comment" spellcheck="true">//     O_RDONLY int = syscall.O_RDONLY // 只读模式打开文件</span>
+    <span class="token comment" spellcheck="true">// O_WRONLY int = syscall.O_WRONLY // 只写模式打开文件</span>
+    <span class="token comment" spellcheck="true">// O_RDWR   int = syscall.O_RDWR   // 读写模式打开文件</span>
+    <span class="token comment" spellcheck="true">// O_APPEND int = syscall.O_APPEND // 写操作时将数据附加到文件尾部</span>
+    <span class="token comment" spellcheck="true">// O_CREATE int = syscall.O_CREAT  // 如果不存在将创建一个新文件</span>
+    <span class="token comment" spellcheck="true">// O_EXCL   int = syscall.O_EXCL   // 和O_CREATE配合使用，文件必须不存在</span>
+    <span class="token comment" spellcheck="true">// O_SYNC   int = syscall.O_SYNC   // 打开文件用于同步I/O</span>
+    <span class="token comment" spellcheck="true">// O_TRUNC  int = syscall.O_TRUNC  // 如果可能，打开时清空文件</span>
+    file<span class="token punctuation">,</span>err<span class="token operator">:=</span>os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span>filepath<span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_WRONLY <span class="token operator">|</span> os<span class="token punctuation">.</span>O_CREATE<span class="token punctuation">,</span><span class="token number">0666</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//o_wronly 等 参考os中的Constants 用"|"做链接，0666在Windows下没作用</span>
+    <span class="token keyword">if</span> err<span class="token operator">!=</span><span class="token boolean">nil</span><span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v"</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//开始写入</span>
+    str <span class="token operator">:=</span> <span class="token string">"hello\r \n "</span>
+    <span class="token comment" spellcheck="true">//写入时，使用带缓存的 *Writer</span>
+    writer <span class="token operator">:=</span> bufio<span class="token punctuation">.</span><span class="token function">NewWriter</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//返回 </span>
+    <span class="token keyword">for</span> i<span class="token operator">:=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">5</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">{</span>
+        writer<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*因为writer是带缓存的，在调用WriterString时，是先写到缓存，所以要调用Flush真正写入    */</span>
+    <span class="token comment" spellcheck="true">/***              以下重要***/</span>
+    writer<span class="token punctuation">.</span><span class="token function">Flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">//及时关闭file句柄</span>
+    <span class="token keyword">defer</span> file<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="文件的copy"><a href="#文件的copy" class="headerlink" title="文件的copy"></a>文件的copy</h4><pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<span class="token comment" spellcheck="true">//文件的copy</span>
+<span class="token comment" spellcheck="true">//func Copy(dst Writer, src Reader) (written int64, err error) 读取src写入到dst witten代表写了多少字节 err代表发生的错误</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">"fmt"</span>
+    <span class="token string">"io"</span>
+    <span class="token string">"bufio"</span>
+    <span class="token string">"os"</span>
+
+<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">//自己编写一个函数，接收两个路径 srcFileName dstFileName</span>
+<span class="token keyword">func</span> <span class="token function">CopyFile</span><span class="token punctuation">(</span>dstWriter <span class="token builtin">string</span> <span class="token punctuation">,</span> srcReader <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>written <span class="token builtin">int64</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    srcFile<span class="token punctuation">,</span>err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span>dstWriter<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span><span class="token boolean">nil</span><span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v"</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">defer</span> srcFile<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">//通过srcFile 获取到Reader带缓存</span>
+    reader<span class="token operator">:=</span>bufio<span class="token punctuation">.</span><span class="token function">NewReader</span><span class="token punctuation">(</span>srcFile<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true">//打开dstFileName</span>
+    dstFile<span class="token punctuation">,</span>err<span class="token operator">:=</span>os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span>srcReader<span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_WRONLY <span class="token operator">|</span> os<span class="token punctuation">.</span>O_CREATE<span class="token punctuation">,</span><span class="token number">0666</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//路径不一定存在要创建后再写入</span>
+    <span class="token keyword">if</span> err<span class="token operator">!=</span><span class="token boolean">nil</span><span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v"</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">defer</span> dstFile<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">//通过dstFile 获取到Writer</span>
+    Writer1<span class="token operator">:=</span>bufio<span class="token punctuation">.</span><span class="token function">NewWriter</span><span class="token punctuation">(</span>dstFile<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// Writer1.Flush()//写入内存</span>
+   <span class="token comment" spellcheck="true">//返回方法</span>
+    <span class="token keyword">return</span> io<span class="token punctuation">.</span><span class="token function">Copy</span><span class="token punctuation">(</span>Writer1<span class="token punctuation">,</span>reader<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+srcFile1 <span class="token operator">:=</span><span class="token string">"C:/Users/ASUS/Desktop/2.png"</span>
+dstFile1<span class="token operator">:=</span> <span class="token string">"C:/Users/ASUS/Desktop/10.png"</span>
+<span class="token boolean">_</span><span class="token punctuation">,</span>err <span class="token operator">:=</span><span class="token function">CopyFile</span><span class="token punctuation">(</span>srcFile1<span class="token punctuation">,</span>dstFile1<span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span><span class="token boolean">nil</span><span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"失败%v"</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"成功"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="json"><a href="#json" class="headerlink" title="json"></a>json</h2><h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><pre><code>package main 
+import (
+    &quot;fmt&quot;
+    &quot;encoding/json&quot;
+    //序列化
+)
+//定义结构体
+type Monster struct {
+    Name string  `json:&quot;monst_name&quot;`//重新命名修改结构体的名字 //利用反射机制//在夸包没法使用的时候使用
+    Age int 
+    Address string 
+}
+//实例化 结构体
+func testStruct(){
+    monster:=Monster{
+        Name:&quot;刘效斌&quot;,
+        Age:18,
+        Address:&quot;山东潍坊&quot;,
+    }
+    //将monster进行序列化
+    data,err := json.Marshal(&amp;monster)
+    if err != nil{
+        fmt.Printf(&quot;%v&quot;,err)
+    }
+    fmt.Printf(&quot;结构体序列化后%v&quot;,string(data))
+}
+//Map序列化
+func testMap() {
+    //定义一个a Map
+    var a map[string]interface{}
+    //使用map时要先make
+    a = make(map[string]interface{})
+    a[&quot;name&quot;]=&quot;刘效斌&quot;
+    a[&quot;age&quot;]=18
+    a[&quot;address&quot;]=&quot;山东&quot;//里面存在一个和时间相关的哈希种子，随机顺序map随机输出
+    // 将a进行序列化
+    data,err := json.Marshal(&amp;a)
+    if err != nil{
+        fmt.Printf(&quot;%v&quot;,err)
+    }
+    fmt.Printf(&quot;\n Map 序列化后%v&quot;,string(data))
+
+}
+
+func testSlice(){
+    var slice []map[string]interface{}//声明map型切片
+    var s1 map[string]interface{}//定义map
+    s1 = make(map[string]interface{})
+    s1[&quot;name&quot;]=&quot;刘效斌&quot;
+    s1[&quot;age&quot;]=18
+    s1[&quot;address&quot;]=&quot;山东&quot;
+    slice =append(slice,s1)
+
+    var s2 map[string]interface{}//添加一个新map到切片中
+    s2 = make(map[string]interface{})
+    s2[&quot;name&quot;]=&quot;刘效斌&quot;
+    s2[&quot;age&quot;]=18
+    s2[&quot;address&quot;]=&quot;山东&quot;
+    slice =append(slice,s2)
+
+    // 将a进行序列化
+    data,err := json.Marshal(&amp;slice)
+    if err != nil{
+        fmt.Printf(&quot;%v&quot;,err)
+    }
+    fmt.Printf(&quot;\n Slice 序列化后%v&quot;,string(data))
+}
+//func Marshal
+// func Marshal(v interface{}) ([]byte, error) //interface{}代表什么类型都能序列化，[]byte 代表返回的是一个byte切片
+func main(){
+testStruct()//放到https://www.json.cn/ 进行检验
+testMap() //map序列化
+ testSlice()//切片序列化
+}</code></pre><h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><pre><code>package main 
+import (
+    &quot;fmt&quot;
+    &quot;encoding/json&quot;
+    //反序列化
+)
+//定义Monster结构体
+type Monster struct {
+    Name string  
+    Age int 
+    Address string 
+}
+func unmarshalStruct(){
+    str:=&quot;{\&quot;Name\&quot;:\&quot;刘效斌\&quot;,\&quot;Age\&quot;:18,\&quot;Address\&quot;:\&quot;山东潍坊\&quot;}&quot;
+    var monster  Monster//实例化
+    err:= json.Unmarshal([]byte(str),&amp;monster)//进行反序列化 str对应byte切片, &amp;monster是引用传递
+    if err != nil{
+        fmt.Printf(&quot;%v&quot;,err)
+    }
+    fmt.Printf(&quot;结构体反序列化后%v&quot;,monster)
+}
+ func main(){
+ unmarshalStruct()
+ }</code></pre><h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><h3 id="单元测试快速入门"><a href="#单元测试快速入门" class="headerlink" title="单元测试快速入门"></a>单元测试快速入门</h3><p>1) 测试用例文件名必须以 _test.go 结尾。 比如 cal_test.go , cal 不是固定的。<br>2) 测试用例函数必须以 Test 开头，一般来说就是 Test+被测试的函数名，比如 TestAddUpper<br>3) TestAddUpper(t *tesing.T) 的形参类型必须是 *testing.T 【看一下手册】<br>4) 一个测试用例文件中，可以有多个测试用例函数，比如 TestAddUpper、TestSub<br>5) 运行测试用例指令<br>(1) cmd&gt;go test [如果运行正确，无日志，错误时，会输出日志]<br>(2) cmd&gt;go test -v [运行正确或是错误，都输出日志]<br>6) 当出现错误时，可以使用 t.Fatalf 来格式化输出错误信息，并退出程序<br>7) t.Logf 方法可以输出相应的日志<br>8) 测试用例函数，并没有放在 main 函数中，也执行了，这就是测试用例的方便之处[原理图].<br>9) PASS 表示测试用例运行成功，FAIL 表示测试用例运行失败<br>10) 测试单个文件，一定要带上被测试的原文件<br>go test -v cal_test.go cal.go<br>11) 测试单个方法<br>go test -v -test.run TestAddUpper</p>
+<h2 id="goroutine-和-channel"><a href="#goroutine-和-channel" class="headerlink" title="goroutine 和 channel"></a>goroutine 和 channel</h2><h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>1) 多线程程序在单核上运行，就是并发<br>2) 多线程程序在多核上运行，就是并行</p>
+<h3 id="Go-协程的特点"><a href="#Go-协程的特点" class="headerlink" title="Go 协程的特点"></a>Go 协程的特点</h3><p>1) 有独立的栈空间<br>2) 共享程序堆空间<br>3) 调度由用户控制<br>4) 协程是轻量级的线程</p>
+<h3 id="goroutine-的调度模型"><a href="#goroutine-的调度模型" class="headerlink" title="goroutine 的调度模型"></a>goroutine 的调度模型</h3><p>PMG</p>
+<p><img src="../AppData/Roaming/Typora/typora-user-images/1568296338884.png" alt="1568296338884"></p>
+<p>管道：</p>
+<pre><code>// 需求：现在要计算 1-200 的各个数的阶乘，并且把各个数的阶乘放入到 map 中。
+// 最后显示出来。要求使用 goroutine 完成
+// 思路
+// 1. 编写一个函数，来计算各个数的阶乘，并放入到 map 中.
+// 2. 我们启动的协程多个，统计的将结果放入到 map 中
+// 3. map 应该做出一个全局的
+var (
+    myMap=make(map[int]int,10)
+    // lock 是一个全局互斥锁
+    // sync 是包 :synchornized同步
+    // Mutex 是互斥
+    lock sync.Mutex
+)
+//test函数是计算n!阶乘让这个结果放到mymap
+func  test(n int){
+    res :=1
+    for i:=1;i&lt;=n;i++{
+        res*=i
+    }
+    lock.Lock()//加锁
+    myMap[n]=res //concurrent map writes
+    lock.Unlock()//解锁
+}
+func main(){
+// 我们这里开启多个协程完成这个任务[200 个]
+    for i := 1; i &lt;= 20; i++ {
+        go test(i)
+    }
+    //休眠 5 秒钟【第二个问题 】
+    time.Sleep(time.Second * 5)
+    lock.Lock()
+    //这里我们输出结果,变量这个结果
+    for i, v := range myMap {
+        fmt.Printf(&quot;map[%d]=%d\n&quot;, i, v)
+    }
+    lock.Unlock()
+}</code></pre><p>1) 前面使用全局变量加锁同步来解决 goroutine 的通讯，但不完美<br>2) 主线程在等待所有 goroutine 全部完成的时间很难确定，我们这里设置 10 秒，仅仅是估算。<br>3) 如果主线程休眠时间长了，会加长等待时间，如果等待时间短了，可能还有 goroutine 处于工作<br>状态，这时也会随主线程的退出而销毁<br>4) 通过全局变量加锁同步来实现通讯，也并不利用多个协程对全局变量的读写操作。<br>5) 上面种种分析都在呼唤一个新的通讯机制-channel</p>
+<pre><code>package main
+import (
+&quot;fmt&quot;
+&quot;time&quot;
+)
+func writeData(intChan chan int){//写入数据并关闭
+    for i:=0;i&lt;50;i++{
+        intChan &lt;-i
+        time.Sleep(time.Second)
+        fmt.Println(i)
+    }
+    close(intChan)
+}
+
+func readData(intChan chan int,exitChan chan bool){//读取数据
+    for {
+        v,ok:= &lt;-intChan
+        if !ok {
+            break
+        }
+        time.Sleep(time.Second)
+        fmt.Printf(&quot;读取数据%v\n&quot;,v)
+    }
+    exitChan &lt;- true //写入数据并写入true
+    close (exitChan) //关闭管道
+}
+func main() {
+
+    //创建两个管道
+    intChan := make(chan int,50) //创建一个int 管道 存放50
+    exitChan := make(chan bool,1)//创建一个bool 管道 1
+    go writeData(intChan)
+    go readData(intChan,exitChan)
+    // time.Sleep(time.Second*10)
+    for {
+        _,ok := &lt;- exitChan
+        if !ok{
+            break
+        }
+    }
+}</code></pre><h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3><p>如果，编译器（运行）发现一个管道，只有写，没有读，会发生阻塞。dead lock</p>
+<p>写管道和读管道的频率不一致，无所谓。</p>
+<h3 id="channel-的遍历"><a href="#channel-的遍历" class="headerlink" title="channel 的遍历"></a>channel 的遍历</h3><p>channel 支持 for–range 的方式进行遍历，请注意两个细节</p>
+<p>1) 在遍历时，如果 channel 没有关闭，则回出现 deadlock 的错误<br>2) 在遍历时，如果 channel 已经关闭，则会正常遍历数据，遍历完后，就会退出遍历。</p>
+<p> 遍历</p>
+<pre><code>    for {
+        v,ok:= &lt;-intChan
+        if !ok {
+            break
+        }</code></pre><p>关闭    close (exitChan)</p>
+<h3 id="素数问题"><a href="#素数问题" class="headerlink" title="素数问题"></a>素数问题</h3><p><img src="go%E7%AC%94%E8%AE%B0/%E7%AE%A1%E9%81%93%E7%B4%A0%E6%95%B0.png" alt="管道素数"></p>
+<p>创建一个任务 p，协程putNum存放1-8000，并且创建一个intchan 然后将8000个数拆分4组 并且判断素数存放到</p>
+<p>primeNum管道  然后exitChan 中有4个变量 每一个成功一个就返回一个ture</p>
+<h3 id="channel-使用细节和注意事项"><a href="#channel-使用细节和注意事项" class="headerlink" title="channel 使用细节和注意事项"></a>channel 使用细节和注意事项</h3><p>1) channel 可以声明为只读，或者只写性质</p>
+<pre><code>    //可以声明只读只写管道
+    // 默认是 双向的
+    // var chan1 chan int// 可读可写
+    // var chan2 chan&lt;- int //只写
+    // chan2 = make(chan int ,3)
+    // chan2&lt;- 20
+    // num := &lt;-chan2//error
+    // var chan3 &lt;-chan int //只读 </code></pre><p>2.使用 select 可以解决从管道取数据的阻塞问题</p>
+<pre><code>package main
+import (
+&quot;fmt&quot;
+&quot;time&quot;
+)
+func main() {
+//使用 select 可以解决从管道取数据的阻塞问题
+//1.定义一个管道 10 个数据 int
+intChan := make(chan int, 10)
+for i := 0; i &lt; 10; i++ {
+intChan&lt;- i
+}
+//2.定义一个管道 5 个数据 string
+stringChan := make(chan string, 5)
+for i := 0; i &lt; 5; i++ {
+stringChan &lt;- &quot;hello&quot; + fmt.Sprintf(&quot;%d&quot;, i)
+}
+//传统的方法在遍历管道时，如果不关闭会阻塞而导致 deadlock
+//问题，在实际开发中，可能我们不好确定什么关闭该管道.
+//可以使用 select 方式可以解决
+//label:
+for {
+select {
+//注意: 这里，如果 intChan 一直没有关闭，不会一直阻塞而 deadlock
+//，会自动到下一个 case 匹配
+case v := &lt;-intChan :
+fmt.Printf(&quot;从 intChan 读取的数据%d\n&quot;, v)
+time.Sleep(time.Second)
+case v := &lt;-stringChan :
+fmt.Printf(&quot;从 stringChan 读取的数据%s\n&quot;, v)
+time.Sleep(time.Second)
+default :
+fmt.Printf(&quot;都取不到了，不玩了, 程序员可以加入逻辑\n&quot;)
+time.Sleep(time.Second)
+return
+//break label
+}
+}
+}</code></pre><ol start="3">
+<li>goroutine 中使用 recover，解决协程中出现 panic，导致程序崩溃问题</li>
+</ol>
+<pre><code>package main
+import (
+&quot;fmt&quot;
+&quot;time&quot;
+)
+//函数
+func sayHello() {
+for i := 0; i &lt; 10; i++ {
+time.Sleep(time.Second)
+fmt.Println(&quot;hello,world&quot;)
+}
+}
+//函数
+func test() {
+//这里我们可以使用 defer + recover
+defer func() {
+//捕获 test 抛出的 panic
+if err := recover(); err != nil {
+fmt.Println(&quot;test() 发生错误&quot;, err)
+}
+}()
+//定义了一个 map
+var myMap map[int]string
+myMap[0] = &quot;golang&quot; //error
+}
+func main() {
+go sayHello()
+go test()
+for i := 0; i &lt; 10; i++ {
+fmt.Println(&quot;main() ok=&quot;, i)
+time.Sleep(time.Second)
+}
+}</code></pre><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p>基本介绍</p>
+<p>1) 反射可以在运行时 动态获取变量的各种信息, 比如变量的类型(type)，类别(kind)<br>2) 如果是结构体变量，还可以获取到结构体本身的信息(包括结构体的 字段、 方法)<br>3) 通过反射，可以修改变量的值，可以调用关联的方法。<br>4) 使用反射，需要 import (“reflect”)</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E5%8F%8D%E5%B0%84.png" alt="1568703997361"></p>
+<h3 id="反射的注意事项和细节"><a href="#反射的注意事项和细节" class="headerlink" title="反射的注意事项和细节"></a>反射的注意事项和细节</h3><p>1) reflect.Value.Kind，获取变量的类别，返回的是一个常量</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E5%8F%8D%E5%B0%8422.png" alt="1568775179168"></p>
+<p>Type 和 Kind 的区别<br>Type 是类型, Kind 是类别， Type 和 Kind  可能是相同的，也 可能是不同的.<br>比如: var num int = 10 num 的 Type 是 int , Kind 也是 int<br>比如: var stu Student stu 的 Type 是 pkg1.Student , Kind 是 struct</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.png" alt="1568775216044"></p>
+<p>5) 通过反射的来修改变量, 注意当使用 SetXxx 方法来设置需要通过对应的指针类型来完成, 这样才能改变传入的变量的值, 同时需要使用reflect.Value.Elem()方法</p>
+<p>6) reflect.Value.Elem() 应该如何理解？</p>
+<p><img src="go%E7%AC%94%E8%AE%B0/elem%E7%90%86%E8%A7%A3.png" alt="1568893358448"></p>
+<h2 id="网络TCP编程"><a href="#网络TCP编程" class="headerlink" title="网络TCP编程"></a>网络TCP编程</h2><p><img src="go%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80.png" alt="1569206095208"></p>
+<h3 id="ip-地址"><a href="#ip-地址" class="headerlink" title="ip 地址"></a>ip 地址</h3><p>概述：每个 internet 上的主机和路由器都有一个 ip 地址，它包括网络号和主机号，ip 地址有 ipv4(32位)或者 ipv6(128 位). 可以通过 ipconfig 来查看</p>
+<h3 id="端口-port-介绍"><a href="#端口-port-介绍" class="headerlink" title="端口(port)-介绍"></a>端口(port)-介绍</h3><p>我们这里所指的端口不是指物理意义上的端口，而是特指 TCP/IP 协议中的端口，是逻辑意义上的端口。<br>如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP 地址的端口 可以有 65536（即：256×256）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从 0 到 65535（256×256-1）</p>
+<p>0 号是保留端口.</p>
+<p> 1-1024 是固定端口(程序员不要使用)</p>
+<p>又叫 有名端口,即被某些程序固定使用,一般程序员不使用.<br>22: SSH 远程登录协议 23: telnet 使用 21: ftp 使用<br>25: smtp 服务使用 80: iis 使用 7: echo 服务</p>
+<p>1025-65535 是 动态端口</p>
+<p>这些端口，程序员可以使用.</p>
+<h3 id="18-2-7-端口-port-使用注意"><a href="#18-2-7-端口-port-使用注意" class="headerlink" title="18.2.7 端口(port)-使用注意"></a>18.2.7 端口(port)-使用注意</h3><p>1) 在计算机(尤其是做服务器)要尽可能的少开端口</p>
+<p>2) 一个端口只能被一个程序监听<br>3) 如果使用 netstat –an 可以查看本机有哪些端口在监听<br>4) 可以使用 netstat –anb 来查看监听端口的 pid,在结合任务管理器关闭不安全的端口</p>
+
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">加个好友吧~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <a  href="/2019/10/13/笔记GO/">
+                    《》
+            </a> 由
+            <a href="http://xiaobin0904.github.io">
+                XiaoBin
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/10/13/笔记GO/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            [TOC]
+GO笔记函数方法unsafe.Sizeof(i)是查看i的大小
+strconv  strconv包实现了基本数据类型和其字符串表示的相互转换
+time time包提供了时间的显示和测量用的函数    
+time.Now 表示当前
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            XiaoBin
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/13/hello-world/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        
+                        <span class="card-title">Hello World</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            XiaoBin
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="http://xiaobin0904.github.io	" target="_blank">XiaoBin</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "10";
+                    var startDate = "10";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/XiaoBin0904" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:liuxiaobin0807@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1348273981" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1348273981" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+
+</body>
+
+</html>
